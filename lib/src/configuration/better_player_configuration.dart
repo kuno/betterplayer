@@ -6,6 +6,9 @@ import 'package:flutter/services.dart';
 ///Master configuration which contains children that configure specific part
 ///of player.
 class BetterPlayerConfiguration {
+  /// 设置是否禁用 iOS 初始化动画
+  final bool disableIOSInitializationAnimation;
+
   /// Play the video as soon as it's displayed
   final bool autoPlay;
 
@@ -120,6 +123,7 @@ class BetterPlayerConfiguration {
 
   const BetterPlayerConfiguration({
     this.aspectRatio,
+    this.disableIOSInitializationAnimation = true,
     this.autoPlay = false,
     this.startAt,
     this.looping = false,
