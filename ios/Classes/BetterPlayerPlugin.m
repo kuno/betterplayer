@@ -299,6 +299,9 @@ bool _remoteCommandsInitialized = false;
 
 - (void)handleMethodCall:(FlutterMethodCall *)call
                   result:(FlutterResult)result {
+  NSDictionary *dataSource = [call arguments];
+  BOOL disableAnimation =
+      [dataSource[@"disableIOSInitializationAnimation"] boolValue];
 
   if ([@"init" isEqualToString:call.method]) {
     // Allow audio playback when the Ring/Silent switch is set to silent
@@ -312,11 +315,13 @@ bool _remoteCommandsInitialized = false;
     BetterPlayer *player = [[BetterPlayer alloc] initWithFrame:CGRectZero];
 
     // 添加以下代码来禁用初始化动画
-    if (@available(iOS 10.0, *)) {
-      player.player.automaticallyWaitsToMinimizeStalling = NO;
-    }
-    if (@available(iOS 11.0, *)) {
-      player.preventsDisplaySleepDuringVideoPlayback = YES;
+    if (disableAnimation) {
+      if (@available(iOS 10.0, *)) {
+        self.player.automaticallyWaitsToMinimizeStalling = NO;
+      }
+      if (@available(iOS 11.0, *)) {
+        self.player.preventsDisplaySleepDuringVideoPlayback = YES;
+      }
     }
 
     [self onPlayerSetup:player result:result];
@@ -331,11 +336,13 @@ bool _remoteCommandsInitialized = false;
       // frame
 
       // 在设置数据源时也添加相同的配置
-      if (@available(iOS 10.0, *)) {
-        player.player.automaticallyWaitsToMinimizeStalling = NO;
-      }
-      if (@available(iOS 11.0, *)) {
-        player.preventsDisplaySleepDuringVideoPlayback = YES;
+      if (disableAnimation) {
+        if (@available(iOS 10.0, *)) {
+          self.player.automaticallyWaitsToMinimizeStalling = NO;
+        }
+        if (@available(iOS 11.0, *)) {
+          self.player.preventsDisplaySleepDuringVideoPlayback = YES;
+        }
       }
 
       NSDictionary *dataSource = argsMap[@"dataSource"];
