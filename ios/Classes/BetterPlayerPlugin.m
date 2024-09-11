@@ -317,10 +317,10 @@ bool _remoteCommandsInitialized = false;
     // 添加以下代码来禁用初始化动画
     if (disableAnimation) {
       if (@available(iOS 10.0, *)) {
-        self.player.automaticallyWaitsToMinimizeStalling = NO;
+        player.automaticallyWaitsToMinimizeStalling = NO;
       }
       if (@available(iOS 11.0, *)) {
-        self.player.preventsDisplaySleepDuringVideoPlayback = YES;
+        player.preventsDisplaySleepDuringVideoPlayback = YES;
       }
     }
 
@@ -338,10 +338,10 @@ bool _remoteCommandsInitialized = false;
       // 在设置数据源时也添加相同的配置
       if (disableAnimation) {
         if (@available(iOS 10.0, *)) {
-          self.player.automaticallyWaitsToMinimizeStalling = NO;
+          player.automaticallyWaitsToMinimizeStalling = NO;
         }
         if (@available(iOS 11.0, *)) {
-          self.player.preventsDisplaySleepDuringVideoPlayback = YES;
+          player.preventsDisplaySleepDuringVideoPlayback = YES;
         }
       }
 
